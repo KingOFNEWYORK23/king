@@ -21,33 +21,6 @@ oldNamecall = hookmetamethod(game, "__namecall", cclosure(function(self,...)
     return oldNamecall(self,...)
 end))
 
-local OldNameCall = nil
-OldNameCall = hookmetamethod(game, "__namecall", newcclosure(function(Self, ...)
-    local Args = {...}
-    local NamecallMethod = getnamecallmethod()
-   
-   
-    if NamecallMethod == "Destroy" or NamecallMethod == "destroy" and Self:IsA("RemoteEvent") then 
-    
-        return 
-    elseif NamecallMethod == "Destroy" or NamecallMethod == "destroy"  and   Self:IsA("RemoteFunction")  then -- : :s kull: I added this for avoiding random bypass
-        return 
-    elseif NamecallMethod == "Disconnect" or NamecallMethod == "disconnect" and Self:IsA("RemoteEvent") then 
-        return 
-    elseif NamecallMethod == "Disconnect" or NamecallMethod == "disconnect" and   Self:IsA("RemoteFunction")  then 
-        return 
-    elseif NamecallMethod == "FireServer" or NamecallMethod == "InvokeServer" then 
-        if NamecallMethod == "kick" or NamecallMethod == "Kick" then 
-         return 
-        end
-        
-    elseif NamecallMethod == "Kick" or NamecallMethod == "kick" then 
-        return 
-    end 
-
-    return OldNameCall(Self, ...)
-end))
-
 local eventbypass
 
 eventbypass = hookmetamethod(game, "__namecall", function(self, ...)
